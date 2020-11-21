@@ -8,9 +8,12 @@
 #include "maze.hpp"
 #include "maze_factory.hpp"
 
-class maze_game {
+/**
+ * Class used to initialize the creating of a new maze.
+ */
+class Maze_Game {
 public:
-    Maze* create_maze(maze_factory& factory);
+    Maze* create_maze(Maze_Factory& factory);
 };
 
 

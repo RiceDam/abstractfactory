@@ -11,15 +11,23 @@
 #include "door.hpp"
 #include "wall.hpp"
 
+/**
+ * Maze struct that holds rooms, doors and walls.
+ */
 struct Maze {
     std::vector<Room *> rooms;
     std::vector<Door *> doors;
     std::vector<Wall *> walls;
+    // Method to print information from the maze.
     virtual void printMaze() = 0;
+    // Method to add a room to the maze.
     virtual void add_room(Room *r) = 0;
+    // Method to add a door to the maze.
     virtual void add_door(Door *d) = 0;
+    // Method to add a wall to the maze.
     virtual void add_wall(Wall *w) = 0;
 
+    // Removes all pointers when maze is deconstructed.
     ~Maze() {
         for (Room *r: rooms) {
             delete r;
@@ -33,6 +41,9 @@ struct Maze {
     }
 };
 
+/**
+ * Faery Land Maze that inherits from the Maze struct.
+ */
 struct FaeryLandMaze : Maze {
     void printMaze() override {
         std::cout << "A pretty, magical faery maze" << std::endl;
@@ -60,6 +71,9 @@ struct FaeryLandMaze : Maze {
     }
 };
 
+/**
+ * Dystopian Maze that inherits from the Maze struct.
+ */
 struct DystopianMaze : Maze {
     void printMaze() override {
         std::cout << "An Orwellian dystopian maze" << std::endl;

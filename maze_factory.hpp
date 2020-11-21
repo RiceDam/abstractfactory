@@ -10,14 +10,24 @@
 #include "room.hpp"
 #include "door.hpp"
 
-struct maze_factory {
+/**
+ * Abstract factory used for creating mazes, doors, walls and rooms.
+ */
+struct Maze_Factory {
+    // Method to create a new maze that gets overrided
     virtual Maze* make_maze() = 0;
+    // Method to create a new wall that gets overrided
     virtual Wall* make_wall() = 0;
+    // Method to create a new room that gets overrided
     virtual Room* make_room(int num) = 0;
+    // Method to create a new door that gets overrided
     virtual Door* make_door(Room* room1, Room* room2) = 0;
 };
 
-struct FaeryLandMaze_Factory : maze_factory {
+/**
+ * Faery Land Maze Factory that inherits from Maze Factory.
+ */
+struct FaeryLandMaze_Factory : Maze_Factory {
     Maze* make_maze() override{
         return new FaeryLandMaze;
     }
@@ -35,7 +45,10 @@ struct FaeryLandMaze_Factory : maze_factory {
     }
 };
 
-struct DystopianMaze_Factory: maze_factory {
+/**
+ * Dystopian Maze Factory that inherits from Maze_Factory.
+ */
+struct DystopianMaze_Factory: Maze_Factory {
     Maze *make_maze() override {
         return new DystopianMaze;
     }

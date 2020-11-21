@@ -3,21 +3,24 @@
 //
 #include "maze_game.hpp"
 
-Maze *maze_game::create_maze(maze_factory &factory) {
+/**
+ * Method used to create a new maze using the maze factory.
+ * @param factory the factory used to create the maze
+ * @return pointer to the newly created maze
+ */
+Maze *Maze_Game::create_maze(Maze_Factory &factory) {
     Maze* maze = factory.make_maze();
     Room* room1 = factory.make_room(0);
     Room* room2 = factory.make_room(1);
-    Wall* wall1 = factory.make_wall();
-    Wall* wall2 = factory.make_wall();
-    Wall* wall3 = factory.make_wall();
-    Wall* wall4 = factory.make_wall();
-    Door* door = factory.make_door(room1, room2);
-    maze->add_door(door);
     maze->add_room(room1);
     maze->add_room(room2);
-    maze->add_wall(wall1);
-    maze->add_wall(wall2);
-    maze->add_wall(wall3);
-    maze->add_wall(wall4);
+    for (Room *r : maze->rooms) {
+        for (int i = 0; i < 4; i++) {
+            Wall *w = factory.make_wall();
+            maze->add_wall(w);
+        }
+    }
+    Door* door = factory.make_door(room1, room2);
+    maze->add_door(door);
     return maze;
 }
